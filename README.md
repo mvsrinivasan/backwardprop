@@ -13,11 +13,11 @@ The loss is propagated layer by layer.
 Each neuron calculates the derivative of the loss with respect to its 
 *  current weights vector W
 *  current bias - b
-*  current inputs vector X -> this is propagated backward as the loss for the previous layer.
+*  current inputs vector X -> this is propagated backward as the derivative of loss with respect to the output of the previous layer.
 
-Once the loss is propagated to all the neurons up to the first layer, the weights are recalculated.
+Once the loss is propagated to all the neurons up to the first layer, the weights and bias are updated to minimize the loss.
 
-Parallelization is hinted at two steps. During backward prop, all neurons in a layer update the loss for the previous layer. 
+Parallelization is hinted at two steps. During backward prop, all neurons in a single layer update the loss for the previous layer in parallel. 
 However this can only happen in sequence layer by layer starting from the output layer to the first layer.
 
 Once all the neurons have calculated the derivative of loss with respect to their weights and biases, all of them update their weights in parallel.
