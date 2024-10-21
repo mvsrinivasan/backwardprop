@@ -18,8 +18,10 @@ Once the loss to be propagated to the previous layer is calculated,  the current
 
 Parallelization is hinted at two steps. 
 * During forward prop, all neurons in a single layer receive the same input and produce their activation output in parallel.
-* During backward prop, all neurons in a single layer update the loss from the previous layer in parallel. 
+* During backward prop the following two steps happen in sequence.
+  * all neurons in a single layer update the loss from the subsequent layer in parallel.
+  * they propagate their loss to the neurons of the previous layer in parallel. 
 
-However these steps can only happen in sequence layer by layer.
+However both forward and backward prop can only be done in sequence layer by layer.
 
 Once the desired loss is arrived at, we stop the training and try to do inference with the Predict function.
